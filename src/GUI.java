@@ -12,6 +12,8 @@ public class GUI implements ActionListener {
     JMenu menuFile, menuEdit, menuFormat, menuColor;
     JMenuItem iNew, iOpen, iSave, iSaveAs, iExit;
 
+    Function_File file = new Function_File(this);
+
 
     public static void main(String[] args) {
 
@@ -66,9 +68,13 @@ public class GUI implements ActionListener {
 
     public void createFileMenu() {
         iNew = new JMenuItem("New");
+        iNew.addActionListener(this);
+        iNew.setActionCommand("New");
         menuFile.add(iNew);
 
         iOpen = new JMenuItem("Open");
+        iOpen.addActionListener(this);
+        iOpen.setActionCommand("Open");
         menuFile.add(iOpen);
 
         iSave = new JMenuItem("Save");
@@ -84,5 +90,12 @@ public class GUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        String command = e.getActionCommand();
+
+        switch (command) {
+            case "New": file.newFile(); break;
+            case "Open": file.open(); break;
+
+        }
     }
 }
